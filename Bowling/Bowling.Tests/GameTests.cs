@@ -17,8 +17,8 @@ namespace Bowling.Tests
             //Act 
             game.Play(10);
             //Assert
-            Assert.True(game.scores.Where(x => x.Frame == 1).Count() == 1);
-            Assert.True(game.scores.FirstOrDefault(x => x.Frame == 1).Value == 10);
+            Assert.True(game.Scores.Where(x => x.Frame == 1).Count() == 1);
+            Assert.True(game.Scores.FirstOrDefault(x => x.Frame == 1).Value == 10);
         }
 
         [Fact(DisplayName = "Frame 1 Bowler bowls STRIKE STRIKE STRIKE Frame Score 30.")]
@@ -31,7 +31,7 @@ namespace Bowling.Tests
             //Act 
             game.Play(1, 10);
             //Assert
-            Assert.True(game.scores.Where(x => x.Frame == 10).Count() == 3);
+            Assert.True(game.Scores.Where(x => x.Frame == 10).Count() == 3);
         }
 
         [Fact(DisplayName = "Frame 10 Bowler bowls SPARE and has 3 bowls.")]
@@ -44,7 +44,7 @@ namespace Bowling.Tests
             //Act 
             game.Play(1, 9);
             //Assert
-            Assert.True(game.scores.Where(x => x.Frame == 10).Count() == 3);
+            Assert.True(game.Scores.Where(x => x.Frame == 10).Count() == 3);
         }
 
         [Fact(DisplayName = "Frame 10 Bowler bowls NO STRIKE, NO SPARE and has 2 bowls.")]
@@ -57,7 +57,7 @@ namespace Bowling.Tests
             //Act 
             game.Play(1, 1);
             //Assert
-            Assert.True(game.scores.Where(x => x.Frame == 1).Count() == 2);
+            Assert.True(game.Scores.Where(x => x.Frame == 1).Count() == 2);
         }
     }
 }

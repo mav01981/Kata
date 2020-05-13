@@ -3,7 +3,7 @@
     using Bowling.Library;
     using System;
     using System.Collections.Generic;
-
+    using System.Linq;
 
     class Program
     {
@@ -18,7 +18,11 @@
             Console.WriteLine(Environment.NewLine);
             Console.WriteLine($"Results");
 
-            foreach (var result in game.Results)
+            foreach (var result in game.Scores?
+                .GroupBy(x => x.Player)
+                .Select(x => new Result { Player = x.Key, Total = x.Sum(y => y.Value) })
+                .OrderByDescending(x => x.Total)
+                .ToList())
             {
                 Console.WriteLine($"Player: {result.Player} Total : {result.Total}");
             }
