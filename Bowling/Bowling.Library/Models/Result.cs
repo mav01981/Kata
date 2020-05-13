@@ -1,4 +1,4 @@
-﻿namespace BowlingLibrary
+﻿namespace Bowling.Library
 {
     public class Result
     {

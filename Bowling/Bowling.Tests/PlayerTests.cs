@@ -1,8 +1,8 @@
 
-using BowlingLibrary;
+using Bowling.Library;
 using Xunit;
 
-namespace Tests.Bowling
+namespace Bowling.Tests
 {
     public class PlayerTests
     {

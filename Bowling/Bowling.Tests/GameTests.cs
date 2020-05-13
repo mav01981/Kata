@@ -1,9 +1,9 @@
-﻿using BowlingLibrary;
+﻿using Bowling.Library;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace Tests.Bowling
+namespace Bowling.Tests
 {
     public class GameTests
     {
