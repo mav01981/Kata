@@ -1,9 +1,9 @@
 ﻿namespace Bowling
 {
-    using Bowling.Library;
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Bowling.Library;
 
     class Program
     {

@@ -1,7 +1,5 @@
 # Bowling
 
-This description is based on that at [Adventures in C#: The Bowling Game](http://ronjeffries.com/xprog/articles/acsbowling/)
-
 ## Problem Description
 
 Create a program, which, given a valid sequence of rolls for one line of American Ten-Pin Bowling, produces the total score for the game. Here are some things that the program will not do:
