@@ -1,59 +1,55 @@
-﻿namespace Bowling.Library
+﻿using Bowling.Library.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Bowling.Library
 {
-    public class Player 
+    public class Player
     {
         public string Name { get; }
+        private int pins { get; set; }
 
-        public Status Status { get; set; }
+        private List<Event> events = new List<Event>();
 
-        public int Bonus { get; set; }
+        public int TotalScore => events.Select(x => x.Score.Value).Sum();
 
-        public int Frame { get; set; }
+        public int LastScore => events.Skip(events.Count() - 1).Select(x => x.Score.Value).First();
 
-        public int LastFrame { get; set; }
-
-        public int FrameScore { get; set; }
-
-        public int TotalScore { get; set; }
-
-        public int RemainingBowls { get; set; }
+        public int Attempts => events.Skip(events.Count() - 1).Select(x => x.Attempts).First();
 
         public Player(string name)
         {
-            this.Name = name;
-            this.Status = Status.NEXT;
+            Name = name;
+            pins = 10;
         }
 
-        public Score Bowl(int frame, int attempt, int score)
+        public void Bowl(int frame, int attempt, int score = 0)
         {
-            if (this.Frame != frame)
-            {
-                this.FrameScore = 0;
-            }
+            score = score == 0 ? new Random().Next(1, pins) : score;
 
-            this.Frame = frame;
-            this.FrameScore += score;
-            this.TotalScore += score;
-
-            bool isStrike = score == 10;
-            bool isSpare = this.FrameScore == 10;
-
-            if (isStrike)
+            events.Add((frame, attempt) switch
             {
-                this.MapRules(Status.STRIKE, attempt);
-                return new Score { Frame = frame, Player = this.Name, Value = score, Description = $"STRIKE 10/10" };
-            }
-            else
-            {
-                if (isSpare)
+                _ when frame < 10 && attempt == 1 && score % pins == 0 || frame == 10 && score % pins == 0 => new Event
                 {
-                    this.MapRules(Status.SPARE, attempt);
-                    return new Score { Frame = frame, Player = this.Name, Value = score, Description = $"SPARE {10 - score} and {score} pins knocked down." };
-                }
+                    Attempts = frame == 10 ? 3 : 0,
+                    Score = new Score { Player = this.Name, Value = score, Description = $"STRIKE 10/10" },
+                },
+                _ when score % pins > 0 => new Event
+                {
+                    Attempts = 2,
+                    Score = new Score { Player = this.Name, Value = score, Description = $"{score} pins knocked down." },
+                },
+                _ when frame < 10 && attempt == 2 && score == pins || frame == 10 && attempt >= 2 && score == pins => new Event
+                {
+                    Attempts = frame == 10 ? 3 : 0,
+                    Score = new Score { Player = this.Name, Value = score, Description = $"SPARE {10 - score} and {score} pins knocked down." },
+                },
+                _ => throw new NotImplementedException(),
+            });
 
-                this.MapRules(Status.NEXT, attempt);
-                return new Score { Frame = frame, Player = this.Name, Value = score, Description = $"{score} pins knocked down." };
-            }
+            pins = pins - score == 0 ? 10 : pins - score;
         }
     }
 }
+

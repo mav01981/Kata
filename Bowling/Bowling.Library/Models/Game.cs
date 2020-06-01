@@ -1,61 +1,41 @@
 ﻿namespace Bowling.Library
 {
-    using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class Game
     {
-        private readonly List<Player> players;
+        private readonly List<Player> _players;
 
-        private int Frames { get; set; }
+        private int frames => 10;
 
-        public readonly List<Score> Scores = new List<Score>();
+        public Player Winner => _players.OrderBy(x => x.TotalScore).First();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Game"/> class.
         /// </summary>
         /// <param name="players"></param>
         /// <param name="frames"></param>
-        public Game(List<Player> players, int frames = 10)
+        public Game(List<Player> players)
         {
-            this.players = players;
-            this.Frames = frames;
+            _players = players;
         }
 
-        public void Play(int firstFrame = 1, int lastFrame = 1)
+        public void Start()
         {
-            for (int frame = 1; frame <= this.Frames; frame++)
+            for (int frame = 1; frame <= frames; frame++)
             {
-                foreach (var player in this.players)
+                foreach (var player in _players)
                 {
-                    int allowedBowls = 2;
-                    int remainingPins = 10;
+                    player.Bowl(frame, 1);
 
-                    for (int attempt = 1; attempt <= (allowedBowls + player.RemainingBowls); attempt++)
+                    var attempts = player.Attempts;
+                    for (int attempt = 2; attempt <= attempts; attempt++)
                     {
-                        var randomScore = frame == this.Frames && attempt == 1 ? lastFrame : (frame == 1 && attempt == 1) ? firstFrame : 1;
-                        var score = player.Bowl(frame, attempt, new Random().Next(randomScore, remainingPins));
-                        this.Scores.Add(score);
-                        this.RaiseNotification(new ProcessEventArgs { Player = player, Score = score });
-
-                        if (player.RemainingBowls == 0)
-                        {
-                            break;
-                        }
-                        else if (player.Status == Status.NEXT)
-                        {
-                            remainingPins -= score.Value;
-                        }
+                        player.Bowl(frame, attempt);
                     }
                 }
             }
         }
-
-        protected virtual void RaiseNotification(ProcessEventArgs e)
-        {
-            this.Notify?.Invoke(this, e);
-        }
-
-        public event EventHandler<ProcessEventArgs> Notify;
     }
 }

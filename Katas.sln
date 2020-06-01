@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bowling", "Bowling", "{7112DC9F-45DB-4866-AE6E-16D90721D661}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bowling.Kata", "Bowling\Bowling.Application\Bowling.Kata.csproj", "{84681239-A9BF-4C89-8004-82BE21D544BF}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bowling.Library", "Bowling\Bowling.Library\Bowling.Library.csproj", "{46AA87FF-F0A1-4A27-85A4-EEA83D4DDB50}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bowling.Tests", "Bowling\Bowling.Tests\Bowling.Tests.csproj", "{F6A90639-A423-4897-A69D-8B08C43BC2D0}"
@@ -17,16 +15,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrimeFactors.Library", "Pri
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrimeFactors.Tests", "PrimeFactors\PrimeFactors.Tests\PrimeFactors.Tests.csproj", "{8CF8E8CD-0F74-434F-B63E-2D9009A97DA9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LeapYear", "LeapYear", "{6A8EB2BF-B626-4C8C-96E1-ED68989D3FD3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeapYear.Library", "LeapYear\LeapYear.Library\LeapYear.Library.csproj", "{D773BC7B-74D7-4561-A177-BF4F296EFE27}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeapYear.Tests", "LeapYear\LeapYear.Tests\LeapYear.Tests.csproj", "{F9B9D38A-FC82-41F4-9301-5CCBE5283CCE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{84681239-A9BF-4C89-8004-82BE21D544BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{84681239-A9BF-4C89-8004-82BE21D544BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{84681239-A9BF-4C89-8004-82BE21D544BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{84681239-A9BF-4C89-8004-82BE21D544BF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{46AA87FF-F0A1-4A27-85A4-EEA83D4DDB50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{46AA87FF-F0A1-4A27-85A4-EEA83D4DDB50}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46AA87FF-F0A1-4A27-85A4-EEA83D4DDB50}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -43,16 +43,25 @@ Global
 		{8CF8E8CD-0F74-434F-B63E-2D9009A97DA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CF8E8CD-0F74-434F-B63E-2D9009A97DA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CF8E8CD-0F74-434F-B63E-2D9009A97DA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D773BC7B-74D7-4561-A177-BF4F296EFE27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D773BC7B-74D7-4561-A177-BF4F296EFE27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D773BC7B-74D7-4561-A177-BF4F296EFE27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D773BC7B-74D7-4561-A177-BF4F296EFE27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9B9D38A-FC82-41F4-9301-5CCBE5283CCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9B9D38A-FC82-41F4-9301-5CCBE5283CCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9B9D38A-FC82-41F4-9301-5CCBE5283CCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9B9D38A-FC82-41F4-9301-5CCBE5283CCE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{84681239-A9BF-4C89-8004-82BE21D544BF} = {7112DC9F-45DB-4866-AE6E-16D90721D661}
 		{46AA87FF-F0A1-4A27-85A4-EEA83D4DDB50} = {7112DC9F-45DB-4866-AE6E-16D90721D661}
 		{F6A90639-A423-4897-A69D-8B08C43BC2D0} = {7112DC9F-45DB-4866-AE6E-16D90721D661}
 		{2AC4B194-527A-4617-AF6A-23A0916C4876} = {F856C677-92BD-41BC-B23E-524D291BC411}
 		{8CF8E8CD-0F74-434F-B63E-2D9009A97DA9} = {F856C677-92BD-41BC-B23E-524D291BC411}
+		{D773BC7B-74D7-4561-A177-BF4F296EFE27} = {6A8EB2BF-B626-4C8C-96E1-ED68989D3FD3}
+		{F9B9D38A-FC82-41F4-9301-5CCBE5283CCE} = {6A8EB2BF-B626-4C8C-96E1-ED68989D3FD3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {17A31CB9-134E-411F-9CF4-BD5D8B3C86D1}

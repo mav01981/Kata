@@ -4,23 +4,25 @@ namespace PrimeFactors
 {
     public class PrimeFactorCalculator
     {
+        private int currentFactor = 2;
+        private int Factor => 2;
+
         public IList<int> Calculate(int number)
         {
             List<int> result = new List<int>();
-            var factor = 2;
 
-            while (number > 1)
+            while (number >= Factor)
             {
-                bool isPrimeFactor = number % factor == 0;
+                bool isPrimeFactor = number % currentFactor == 0;
                 if (isPrimeFactor)
                 {
-                    result.Add(factor);
+                    result.Add(currentFactor);
 
-                    number /= factor;
+                    number /= currentFactor;
                 }
                 else
                 {
-                    factor += factor == 2 ? 1 : 2;
+                    currentFactor += currentFactor == 2 ? 1 : 2;
                 }
             }
             return result;
