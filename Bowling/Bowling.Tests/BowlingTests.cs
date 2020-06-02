@@ -6,95 +6,75 @@ namespace Bowling.Tests
 {
     public class BowlingTests
     {
-        [Fact(DisplayName = "Frame 1/Attempt 1 : no strike : 2 bowls allowed")]
+        private IFrameFactory frameFactory = new FrameFactory();
+
+        [Fact(DisplayName = "9- 9- 9- 9- 9- 9- 9- 9- 9- 9- (20 rolls: 10 pairs of 9 and miss) = 10 frames * 9 points = 90")]
         [Trait("Bowling", "Players")]
-        public void Frame1_Scores7_TwoBowlsAllowed()
+        public void TwentyRolls_NineAndMiss_Scores90()
         {
-            var player = new Player("James");
+            var game = new Game(frameFactory);
 
-            player.Bowl(1, 1, 7);
+            for (int i = 1; i <= 10; i++)
+            {
+                game.Roll(9);
+                game.Roll(0); // 0 + 9  =>9
+            }
 
-            Assert.True(player.Attempts == 2);
+            Assert.True(game.Score() == 90);
         }
 
-        [Fact(DisplayName = "Frame 1/Attempt 2: 6 and 4 for SPARE : 0 No extra bowl allowed.")]
+        [Fact(DisplayName = "9- 9- 9- 9- 9- 9- 9- 9- 9- 9- (20 rolls: 10 pairs of 9 and miss) = 10 frames * 9 points = 90")]
         [Trait("Bowling", "Players")]
-        public void Frame1_SPARE_ScoresTen()
+        public void TwentyRolls_MissAndNine_Scores90()
         {
-            var player = new Player("James");
+            var game = new Game(frameFactory);
 
-            player.Bowl(1, 1, 6);
-            player.Bowl(1, 2, 4);
+            for (int i = 1; i <= 10; i++)
+            {
+                game.Roll(0);
+                game.Roll(9); // 0 + 9  =>9
+            }
 
-            Assert.True(player.TotalScore == 10);
-            Assert.True(player.Attempts == 0);
+            Assert.True(game.Score() == 90);
         }
 
-        [Fact(DisplayName = "Frame 10/Attempt 1 : STRIKE : Three bowls allowed")]
+        [Fact(DisplayName = "5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/5 12 21 rolls: 10 pairs of 5 and spare, with a final 5) = 10 frames * 15 points = 150")]
         [Trait("Bowling", "Players")]
-        public void FrameTen_Strike_AllowedThreeBowls()
+        public void TwentyOneRolls_5ANDSPARE_Scores150()
         {
-            var player = new Player("James");
+            var game = new Game(frameFactory);
 
-            player.Bowl(10, 1, 10);
+            for (int i = 1; i <= 10; i++)
+            {
+                game.Roll(5);
+                game.Roll(5);     // 5 +5 +5 =>15
+                if (i == 10)
+                {
+                    game.Roll(5);
+                }
+            }
 
-            Assert.True(player.TotalScore == 10);
-            Assert.True(player.Attempts == 3);
+            Assert.True(game.Score() == 150);
         }
 
-        [Fact(DisplayName = "Frame 10/Attempt2 SPARE with 1 bowl remaining")]
+        [Fact(DisplayName = "X X X X X X X X X X X X 12 rolls: 12 strikes")]
         [Trait("Bowling", "Players")]
-        public void FrameTen_SPARE_3BowlsRequired()
+        public void TwelveRolls_TwelveStrikes_Scores300()
         {
-            var player = new Player("James");
+            var game = new Game(frameFactory);
 
-            player.Bowl(10, 1, 9);
-            player.Bowl(10, 2, 1);
+            for (int i = 1; i <= 10; i++)
+            {
+                game.Roll(10);   // 10 +10 +10 =>30
+                if (i == 10) // 2 more bowls
+                {
+                    game.Roll(10);
+                    game.Roll(10);
+                }
+            }
 
-            Assert.True(player.TotalScore == 10);
-            Assert.True(player.Attempts == 3);
+            Assert.True(game.Score() == 300);
         }
 
-        [Fact(DisplayName = "Frame 10 : STRIKE STRIKE STRIKE : scores 30")]
-        [Trait("Bowling", "Players")]
-        public void FrameTen_STRIKESTRIKESTRIKE_returnsTotalScore30()
-        {
-            var player = new Player("James");
- 
-            player.Bowl(10, 1, 10);
-            player.Bowl(10, 2, 10);
-            player.Bowl(10, 3, 10);
-
-            Assert.True(player.TotalScore == 30);
-            Assert.True(player.Attempts ==3);
-        }
-
-        [Fact(DisplayName = "Frame 10: 9,1,Strike for SPARE with score of 20 with 0 bowls remaining")]
-        [Trait("Bowling", "Players")]
-        public void FrameTen_SPARE_STRIKE_0BowlRemaining()
-        {
-            var player = new Player("James");
-
-            player.Bowl(10, 1, 9);
-            player.Bowl(10, 2, 1);
-            player.Bowl(10, 3, 10);
-
-            Assert.True(player.TotalScore == 20);
-            Assert.True(player.Attempts == 3);
-        }
-
-        [Fact(DisplayName = "Frame 10: STRIKE,9,1 for SPARE with score of 20 with 0 bowls remaining")]
-        [Trait("Bowling", "Players")]
-        public void FrameTen_STRIKESPARE_ThreeBowls()
-        {
-            var player = new Player("James");
-
-            player.Bowl(10, 1, 10);
-            player.Bowl(10, 2, 1);
-            player.Bowl(10, 3, 9);
-
-            Assert.True(player.TotalScore == 20);
-            Assert.True(player.Attempts == 3);
-        }
     }
 }
