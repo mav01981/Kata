@@ -1,6 +1,5 @@
 ﻿using Bowling.Library.Interfaces;
 using Bowling.Library.Models;
-using System.Linq;
 
 namespace Bowling.Library
 {
@@ -15,7 +14,7 @@ namespace Bowling.Library
 
         private bool IsSpare(int roll)
         {
-            return _rolls.ToList().GetRange(roll, 2).Sum() == 10;
+            return (_rolls[roll] + _rolls[roll + 1]) == 10;
         }
 
         private bool IsStrike(int roll)
