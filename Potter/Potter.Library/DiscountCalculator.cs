@@ -29,7 +29,9 @@ namespace Potter.Library
             {
                 quantity = numberOfBooks / matchingBookCount;
 
-                return ((bookCost * matchingBookCount) * factor) * quantity;
+                int numberOfBooksNotDiscounted = numberOfBooks - (matchingBookCount * quantity);
+
+                return (((bookCost * matchingBookCount) * factor) * quantity) + (numberOfBooksNotDiscounted * 8); ;
             }
             else if (matchingBookCount == distinctTitles && distinctTitles % matchingBookCount == 0)
             {

@@ -78,8 +78,8 @@ namespace Potter.Tests
         }
 
         /// <summary>
-        /// 2 copies of the first book. => 2
-        /// 1 copy of the fifth book. => 8
+        /// 2 copies of the first book. => 5% discount applied to 2 books
+        /// 1 copy of the fifth book. => 8 Euros
         /// </summary>
         /// <param name="books"></param>
         [Theory]
